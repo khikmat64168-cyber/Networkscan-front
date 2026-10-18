@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-16T18:57:24+00:00",
+  "title": "Design System: NST Web",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0b0d10",
+        "oklch": "oklch(15.8% 0.007 258.4)",
+        "tonalRamp": [
+          "#090b0e",
+          "#232529",
+          "#404246",
+          "#5f6165",
+          "#808287",
+          "#a2a5aa",
+          "#c6c9ce",
+          "#ebeff3"
+        ]
+      },
+      "ink-raised": {
+        "role": "neutral",
+        "displayName": "Raised Ink",
+        "canonical": "#111418",
+        "oklch": "oklch(19.0% 0.009 255.6)",
+        "tonalRamp": [
+          "#090b0f",
+          "#22252a",
+          "#3f4247",
+          "#5e6267",
+          "#7f8388",
+          "#a1a5ab",
+          "#c5c9cf",
+          "#eaeff5"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "canonical": "#1c2127",
+        "oklch": "oklch(24.5% 0.014 253.1)",
+        "tonalRamp": [
+          "#070c11",
+          "#20262c",
+          "#3d4349",
+          "#5c6269",
+          "#7d838b",
+          "#9fa6ae",
+          "#c3cad2",
+          "#e8eff8"
+        ]
+      },
+      "slate-raised": {
+        "role": "neutral",
+        "displayName": "Slate Raised",
+        "canonical": "#252b33",
+        "oklch": "oklch(28.7% 0.017 255.7)",
+        "tonalRamp": [
+          "#070b12",
+          "#20262d",
+          "#3c434b",
+          "#5b626b",
+          "#7c838d",
+          "#9ea6b0",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "slate-selected": {
+        "role": "neutral",
+        "displayName": "Slate Selected",
+        "canonical": "#303740",
+        "oklch": "oklch(33.4% 0.019 254.8)",
+        "tonalRamp": [
+          "#060c13",
+          "#1f262e",
+          "#3b434c",
+          "#5a626c",
+          "#7b838e",
+          "#9da6b1",
+          "#c1cad5",
+          "#e6effb"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#2a3038",
+        "oklch": "oklch(30.7% 0.017 255.6)",
+        "tonalRamp": [
+          "#070b12",
+          "#20262d",
+          "#3c434b",
+          "#5b626b",
+          "#7c838c",
+          "#9ea6b0",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Line Strong",
+        "canonical": "#3a424c",
+        "oklch": "oklch(37.6% 0.020 254.1)",
+        "tonalRamp": [
+          "#060c14",
+          "#1e262f",
+          "#3b434d",
+          "#5a626d",
+          "#7a838f",
+          "#9da6b2",
+          "#c0cad6",
+          "#e6f0fc"
+        ]
+      },
+      "steel": {
+        "role": "neutral",
+        "displayName": "Steel",
+        "canonical": "#6b7178",
+        "oklch": "oklch(54.6% 0.013 252.2)",
+        "tonalRamp": [
+          "#070c11",
+          "#21262b",
+          "#3d4349",
+          "#5c6269",
+          "#7d838a",
+          "#9fa6ad",
+          "#c3cad2",
+          "#e8eff7"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Secondary Text",
+        "canonical": "#959ca5",
+        "oklch": "oklch(69.0% 0.015 254.6)",
+        "tonalRamp": [
+          "#070b12",
+          "#20262d",
+          "#3d434a",
+          "#5b626a",
+          "#7c838c",
+          "#9fa6af",
+          "#c3cad3",
+          "#e8eff9"
+        ]
+      },
+      "panel-white": {
+        "role": "neutral",
+        "displayName": "Panel White",
+        "canonical": "#e6e8eb",
+        "oklch": "oklch(93.0% 0.005 258.3)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#242527",
+          "#404244",
+          "#606164",
+          "#818285",
+          "#a3a5a8",
+          "#c7c9cc",
+          "#edeff2"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "alert-yellow": {
+        "role": "primary",
+        "displayName": "Gate Yellow",
+        "canonical": "#ffd400",
+        "oklch": "oklch(88.1% 0.181 94.0)",
+        "tonalRamp": [
+          "#100b00",
+          "#2d2401",
+          "#4f4103",
+          "#74600a",
+          "#9a8012",
+          "#c3a205",
+          "#ecc627",
+          "#ffeeb5"
+        ]
+      },
+      "alert-yellow-bright": {
+        "role": "primary",
+        "displayName": "Gate Yellow Bright",
+        "canonical": "#ffe04d",
+        "oklch": "oklch(90.7% 0.162 97.0)",
+        "tonalRamp": [
+          "#0f0b00",
+          "#2c2502",
+          "#4d4205",
+          "#71610c",
+          "#978215",
+          "#bfa40e",
+          "#e7c82c",
+          "#ffefab"
+        ]
+      },
+      "alert-ink": {
+        "role": "primary",
+        "displayName": "Alert Ink",
+        "canonical": "#1a1500",
+        "oklch": "oklch(19.6% 0.040 98.0)",
+        "tonalRamp": [
+          "#0f0b00",
+          "#2a250c",
+          "#484229",
+          "#676247",
+          "#888367",
+          "#aba689",
+          "#d0caac",
+          "#f5efd1"
+        ]
+      },
+      "ok-green": {
+        "role": "secondary",
+        "displayName": "Running Green",
+        "canonical": "#3dd68c",
+        "oklch": "oklch(77.9% 0.165 157.3)",
+        "tonalRamp": [
+          "#000f06",
+          "#002e18",
+          "#00502e",
+          "#047446",
+          "#099b5f",
+          "#1bc37a",
+          "#55e99d",
+          "#c4ffda"
+        ]
+      },
+      "critical-red": {
+        "role": "secondary",
+        "displayName": "Critical Red",
+        "canonical": "#e5484d",
+        "oklch": "oklch(62.6% 0.193 23.0)",
+        "tonalRamp": [
+          "#1e0002",
+          "#4c010a",
+          "#7f0417",
+          "#b60d26",
+          "#de4148",
+          "#fc7573",
+          "#feb2ae",
+          "#fee9e7"
+        ]
+      },
+      "high-coral": {
+        "role": "tertiary",
+        "displayName": "High Coral",
+        "canonical": "#ff8a65",
+        "oklch": "oklch(75.5% 0.151 38.3)",
+        "tonalRamp": [
+          "#1b0300",
+          "#461000",
+          "#752100",
+          "#a5380f",
+          "#cc5c38",
+          "#f37f5b",
+          "#fdb59e",
+          "#ffe9e3"
+        ]
+      },
+      "medium-sand": {
+        "role": "tertiary",
+        "displayName": "Medium Sand",
+        "canonical": "#e2c27a",
+        "oklch": "oklch(82.6% 0.098 86.3)",
+        "tonalRamp": [
+          "#110a00",
+          "#302301",
+          "#543e03",
+          "#7a5c08",
+          "#9c7e35",
+          "#c0a159",
+          "#e5c57d",
+          "#feedc7"
+        ]
+      },
+      "low-mist": {
+        "role": "tertiary",
+        "displayName": "Low Mist",
+        "canonical": "#9fb0c3",
+        "oklch": "oklch(75.0% 0.033 251.2)",
+        "tonalRamp": [
+          "#020c19",
+          "#192635",
+          "#354353",
+          "#536374",
+          "#748496",
+          "#96a7ba",
+          "#bacbdf",
+          "#e3f0ff"
+        ]
+      },
+      "info-grey": {
+        "role": "tertiary",
+        "displayName": "Info Grey",
+        "canonical": "#7d858e",
+        "oklch": "oklch(61.3% 0.017 251.2)",
+        "tonalRamp": [
+          "#060c12",
+          "#1f262d",
+          "#3c434b",
+          "#5a626b",
+          "#7b838c",
+          "#9ea6af",
+          "#c2cad4",
+          "#e7f0fa"
+        ]
+      },
+      "pass-label": {
+        "role": "neutral",
+        "displayName": "Pass Label",
+        "canonical": "#545b63",
+        "oklch": "oklch(46.8% 0.016 251.7)",
+        "tonalRamp": [
+          "#070c12",
+          "#20262d",
+          "#3c434a",
+          "#5b626a",
+          "#7c838c",
+          "#9ea6af",
+          "#c2cad3",
+          "#e7eff9"
+        ]
+      },
+      "pass-rule": {
+        "role": "neutral",
+        "displayName": "Pass Rule",
+        "canonical": "#cdd1d6",
+        "oklch": "oklch(85.9% 0.008 253.9)",
+        "tonalRamp": [
+          "#090b0f",
+          "#222529",
+          "#3f4246",
+          "#5e6266",
+          "#7f8387",
+          "#a2a5aa",
+          "#c5c9ce",
+          "#ebeff4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Live clock in the top bar only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Pass title: the finding summary."
+      },
+      "board-figure": {
+        "displayName": "Board Figure",
+        "purpose": "From/to route on the pass and figure-strip values."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default UI and prose."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Tables, notices, form fields."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase column headers, field and segment labels."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Uppercase buttons, tabs, segmented controls and status words."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Evidence values, inline code, mono inputs."
+      }
+    },
+    "shadows": [
+      {
+        "name": "pass-lift",
+        "value": "0 18px 40px -18px rgba(0, 0, 0, 0.7)",
+        "purpose": "The docked boarding pass; the only lifted surface."
+      },
+      {
+        "name": "sheet-lift",
+        "value": "0 -12px 40px rgba(0, 0, 0, 0.6)",
+        "purpose": "The pass as a bottom sheet below 1080px."
+      },
+      {
+        "name": "flap-seam",
+        "value": "0 1px 0 rgba(0, 0, 0, 0.5)",
+        "purpose": "Lower edge of a split-flap cell."
+      },
+      {
+        "name": "nav-active-inset",
+        "value": "inset 0 0 0 1px #3a424c",
+        "purpose": "Current rail nav item stroke."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid #ffd400; outline-offset: 2px",
+        "purpose": "Global :focus-visible; inputs use a yellow stroke plus 0 0 0 1px ring instead."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "House ease for every transition and animation."
+      },
+      {
+        "name": "state-change",
+        "value": "150ms",
+        "purpose": "Hover, press and focus transitions on controls, nav and rows."
+      },
+      {
+        "name": "arrive",
+        "value": "1.6s, rgba(255, 212, 0, 0.32) background fading to rest",
+        "purpose": "Flash on a newly ranked board row."
+      },
+      {
+        "name": "line-pulse",
+        "value": "2.4s infinite, opacity 1 to 0.45",
+        "purpose": "Running sensor leader line."
+      },
+      {
+        "name": "shimmer",
+        "value": "1.4s linear infinite",
+        "purpose": "Skeleton loading bars."
+      },
+      {
+        "name": "bar-grow",
+        "value": "300ms width",
+        "purpose": "Share bars in traffic breakdowns."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "durations to 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce disables all motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1280px",
+        "purpose": "Pass narrows to 360px; sensor leader hides."
+      },
+      {
+        "name": "board-single",
+        "value": "1080px",
+        "purpose": "Board single column; pass becomes bottom sheet."
+      },
+      {
+        "name": "rail-top",
+        "value": "820px",
+        "purpose": "Rail becomes horizontal top nav; sensor rows re-flow."
+      },
+      {
+        "name": "phone",
+        "value": "560px",
+        "purpose": "Auto-height board rows, clamped finding text."
+      }
+    ],
+    "layout": {
+      "railWidth": "216px",
+      "topBarHeight": "72px",
+      "passWidth": "400px",
+      "boardRowHeight": "46px",
+      "pagePadding": "20px 24px 40px"
+    }
+  },
+  "components": [
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Slate plate with board-type label; the everyday action.",
+      "html": "<button class=\"ds-btn\">Stop</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px;border-radius:4px;border:1px solid var(--line-strong,#3a424c);background:var(--slate,#1c2127);color:var(--text,#e6e8eb);font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-transform:uppercase;font-size:12px;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:background 150ms cubic-bezier(.16,1,.3,1),border-color 150ms cubic-bezier(.16,1,.3,1)}.ds-btn:hover{background:var(--slate-2,#252b33);border-color:var(--steel,#6b7178)}.ds-btn:active{background:var(--slate-3,#303740)}.ds-btn:focus-visible{outline:2px solid var(--alert,#ffd400);outline-offset:2px}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Gate Yellow plate; the screen's one start or run action.",
+      "html": "<button class=\"ds-btn-primary\">Start the rest</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:4px;border:1px solid var(--alert,#ffd400);background:var(--alert,#ffd400);color:var(--alert-ink,#1a1500);font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-transform:uppercase;font-size:12px;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:background 150ms cubic-bezier(.16,1,.3,1)}.ds-btn-primary:hover{background:#ffe04d;border-color:#ffe04d}.ds-btn-primary:focus-visible{outline:2px solid var(--alert,#ffd400);outline-offset:2px}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Raised-ink field; yellow stroke and ring on focus.",
+      "html": "<input class=\"ds-input\" placeholder=\"Search finding or asset\">",
+      "css": ".ds-input{height:34px;padding:0 10px;border-radius:4px;border:1px solid var(--line-strong,#3a424c);background:var(--ink-2,#111418);color:var(--text,#e6e8eb);font:400 13px/1.5 var(--font-ui, 'Inter Variable', -apple-system, sans-serif);transition:border-color 150ms cubic-bezier(.16,1,.3,1)}.ds-input::placeholder{color:#7a818a}.ds-input:hover{border-color:var(--steel,#6b7178)}.ds-input:focus-visible{outline:none;border-color:var(--alert,#ffd400);box-shadow:0 0 0 1px var(--alert,#ffd400)}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Left rail items; current item gets slate fill, inset stroke and the yellow new count.",
+      "html": "<nav class=\"ds-nav\"><button class=\"ds-nav-item\" aria-current=\"page\">Board <span class=\"ds-count\">99+</span></button><button class=\"ds-nav-item\">Traffic</button><button class=\"ds-nav-item\">TLS</button></nav>",
+      "css": ".ds-nav{display:flex;flex-direction:column;gap:2px;width:192px;padding:12px;background:var(--ink-2,#111418)}.ds-nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border:0;border-radius:8px;background:transparent;color:var(--text-2,#959ca5);font:400 14px/1.5 var(--font-ui, 'Inter Variable', -apple-system, sans-serif);text-align:left;cursor:pointer;transition:background 150ms cubic-bezier(.16,1,.3,1),color 150ms cubic-bezier(.16,1,.3,1)}.ds-nav-item:hover{background:var(--slate,#1c2127);color:var(--text,#e6e8eb)}.ds-nav-item[aria-current=page]{background:var(--slate,#1c2127);color:var(--text,#e6e8eb);box-shadow:inset 0 0 0 1px var(--line-strong,#3a424c)}.ds-nav-item:focus-visible{outline:2px solid var(--alert,#ffd400);outline-offset:2px}.ds-count{margin-left:auto;min-width:22px;padding:0 6px;border-radius:99px;background:var(--alert,#ffd400);color:var(--alert-ink,#1a1500);font:600 11px/18px var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-align:center}"
+    },
+    {
+      "name": "Severity Tags",
+      "kind": "chip",
+      "refersTo": "severity-tag",
+      "description": "Outlined ramp-colour tags; only critical is solid red.",
+      "html": "<span class=\"ds-sev ds-crit\">Critical</span> <span class=\"ds-sev\" style=\"color:#ff8a65\">High</span> <span class=\"ds-sev\" style=\"color:#e2c27a\">Medium</span> <span class=\"ds-sev\" style=\"color:#9fb0c3\">Low</span> <span class=\"ds-sev\" style=\"color:#7d858e\">Info</span>",
+      "css": ".ds-sev{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:3px;border:1px solid currentColor;font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-transform:uppercase;font-size:11px;font-weight:600;letter-spacing:.1em}.ds-crit{background:#e5484d;border-color:#e5484d;color:#fff}"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "status-pill",
+      "description": "Top-bar stream and capture status with a tone dot.",
+      "html": "<span class=\"ds-pill\"><i class=\"ds-dot\"></i>Live</span>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:99px;border:1px solid var(--line-strong,#3a424c);color:var(--text,#e6e8eb);font:400 12px/1 var(--font-ui, 'Inter Variable', -apple-system, sans-serif)}.ds-dot{width:7px;height:7px;border-radius:50%;background:var(--ok,#3dd68c)}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat slate container with a hairline-divided board-type head.",
+      "html": "<section class=\"ds-panel\"><header class=\"ds-panel-head\"><h3>Sensors</h3><span>3 of 4 running</span></header><div class=\"ds-panel-body\">Panel content</div></section>",
+      "css": ".ds-panel{background:var(--slate,#1c2127);border:1px solid var(--line,#2a3038);border-radius:12px;color:var(--text,#e6e8eb);font:400 14px/1.5 var(--font-ui, 'Inter Variable', -apple-system, sans-serif)}.ds-panel-head{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line,#2a3038)}.ds-panel-head h3{margin:0;font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-transform:uppercase;font-size:13px;font-weight:600;letter-spacing:.12em}.ds-panel-head span{color:var(--text-2,#959ca5);font-size:12px}.ds-panel-body{padding:16px}"
+    },
+    {
+      "name": "Split-flap Cell",
+      "kind": "custom",
+      "refersTo": "flap-cell",
+      "description": "Two leaves at a hairline seam; assets and interfaces.",
+      "html": "<span class=\"ds-flap\">www.googleapis.com</span>",
+      "css": ".ds-flap{display:inline-block;max-width:100%;padding:3px 7px;border-radius:3px;background:linear-gradient(to bottom,transparent calc(50% - .5px),rgba(0,0,0,.55) calc(50% - .5px),rgba(0,0,0,.55) calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom,#20252c 50%,#1a1e24 50%);box-shadow:0 1px 0 rgba(0,0,0,.5);color:var(--text,#e6e8eb);font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;font-size:12px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}"
+    },
+    {
+      "name": "Findings Board Row",
+      "kind": "custom",
+      "refersTo": "board-row",
+      "description": "46px rows; unread rows brighten and light NEW in yellow, the row stays on ink.",
+      "html": "<table class=\"ds-board\"><tr class=\"ds-row\" data-unread=\"true\"><td class=\"ds-t\">03:53:58</td><td>172.217.114.4 → 172.217.119.4</td><td class=\"ds-new\">NEW</td></tr><tr class=\"ds-row\"><td class=\"ds-t\">03:53:58</td><td>172.217.119.4 → 172.217.116.4</td><td class=\"ds-seen\">SEEN</td></tr></table>",
+      "css": ".ds-board{width:100%;border-collapse:collapse;background:var(--slate,#1c2127);font:400 14px/1.5 var(--font-ui, 'Inter Variable', -apple-system, sans-serif)}.ds-row td{height:46px;padding:0 12px;border-bottom:1px solid var(--line,#2a3038);color:var(--text-2,#959ca5);transition:background 150ms cubic-bezier(.16,1,.3,1)}.ds-row:hover td{background:var(--slate-2,#252b33)}.ds-row[data-unread=true] td{color:var(--text,#e6e8eb)}.ds-t{font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;font-size:13px}.ds-new,.ds-seen{font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;font-size:12px;font-weight:700;letter-spacing:.12em}.ds-row .ds-new{color:var(--alert,#ffd400)}.ds-row .ds-seen{color:var(--steel,#6b7178);font-weight:500}"
+    },
+    {
+      "name": "Boarding Pass",
+      "kind": "custom",
+      "refersTo": "pass",
+      "description": "The one paper surface: head band, route, perforation, segments, evidence.",
+      "html": "<article class=\"ds-pass\"><header class=\"ds-pass-head\"><span>High</span><span>NST-0689</span></header><h3 class=\"ds-pass-title\">DNS IP changed for www.googleapis.com</h3><div class=\"ds-route\"><div><small>Previous IP</small><b>172.217.119.4</b></div><div style=\"text-align:right\"><small>New IP</small><b>172.217.116.4</b></div></div><div class=\"ds-perf\"></div><div class=\"ds-segs\"><div><small>Finding</small>IP change</div><div><small>Sensor</small>DNS spoofing detector</div></div></article>",
+      "css": ".ds-pass{width:360px;background:var(--text,#e6e8eb);color:#111418;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -18px rgba(0,0,0,.7);font:400 14px/1.5 var(--font-ui, 'Inter Variable', -apple-system, sans-serif)}.ds-pass-head{display:flex;justify-content:space-between;padding:12px 18px;background:#111418;color:var(--text,#e6e8eb);font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-transform:uppercase;font-size:13px;font-weight:700;letter-spacing:.06em}.ds-pass-title{margin:0;padding:16px 18px 14px;font-size:18px;font-weight:600;line-height:1.35}.ds-route{display:flex;justify-content:space-between;gap:10px;padding:0 18px 16px}.ds-route b{display:block;font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;font-size:20px;font-weight:600;line-height:1.15}.ds-pass small{display:block;font-family:var(--font-board, 'Martian Mono Variable', ui-monospace, monospace);font-stretch:75%;text-transform:uppercase;font-size:11px;letter-spacing:.12em;color:#545b63;margin-bottom:4px}.ds-perf{border-top:2px dashed #b9bec5;margin:0 18px}.ds-segs{display:grid;grid-template-columns:1fr 1fr}.ds-segs>div{padding:12px 18px;border-bottom:1px solid #cdd1d6;font-size:13px;font-weight:500}.ds-segs>div:first-child{border-right:1px solid #cdd1d6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Departures Board",
+    "overview": "**Creative North Star: \"The Departures Board\"**\n\nNST Web is an airport gate board at night. Findings arrive like departures: each holds its row, re-ranks in place, and a new or changed row carries a lit yellow status until someone opens it. Opening a row issues a boarding pass, the one light-paper object in a dark hall, which shows the route (from → to), the gate details (finding, asset, sensor, filed time), and the raw evidence below a perforated tear line. Everything else stays quiet: ink ground, slate panels, hairline rules.\n\nDensity is operational. Rows sit at 46px, labels are small condensed uppercase mono, and figures are tabular so columns of numbers hold still while they update. The world uses two voices: a condensed board mono (Martian Mono at 75% width) for anything you would see on a departures display (labels, times, codes, figures, buttons), and a workhorse sans (Inter) for sentences a person reads. Colour is held back so it can carry meaning: one alert yellow for new and act-now, a severity ramp from coral to mist, and solid red only for critical.\n\nThe world rejects the SOC template of KPI tiles above an alert table. Figures live in rows and in joined, hairline-divided strips, never in a grid of separate cards.",
+    "keyCharacteristics": [
+      "Dark ink ground (#0b0d10) with slate panels and 1px hairlines; depth is tonal.",
+      "Condensed tabular board mono for labels, figures and actions; Inter for prose.",
+      "Alert yellow is scarce and semantic: new, primary action, focus, current tab.",
+      "The boarding pass is the only light, shadowed surface, with perforation, notches and a scan code.",
+      "Split-flap cells for assets and interfaces; state carried in line form on sensor leaders."
+    ],
+    "rules": [
+      {
+        "name": "The Lit Status Rule",
+        "body": "Yellow marks what is new or what to do next, and nothing else. A new row lights its status cell and brightens its text; the row background stays on ink, so yellow remains scarce however many findings arrive.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Is Earned Rule",
+        "body": "Solid red fills only critical severity and the critical pass head. High, medium, low and info are outlined text tags in their ramp colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "If it would appear on a departures board (time, code, address, count, status, action), set it in condensed board mono; if it is a sentence, set it in Inter. Never set prose in the mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Still Figures Rule",
+        "body": "Every live number uses tabular figures so columns do not jitter as values change.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Paper Rule",
+        "body": "The boarding pass is the only light surface and the only element that casts a real shadow. Panels, cards and rows stay flat on ink.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do reserve Gate Yellow for new, act-now and focus: the primary action, NEW status, new count, active tab, focus ring and the arrival flash.",
+      "Do set times, addresses, serials, counts, status words and buttons in the condensed board mono (75% width, tabular), and sentences in Inter.",
+      "Do show evidence on a pass: route on top, perforation, labelled segments, then evidence.",
+      "Do carry sensor state in the leader line form as well as the status word.",
+      "Do keep panels flat slate on ink with 1px hairlines and 12px corners.",
+      "Do honour reduced motion; the house ease is cubic-bezier(0.16, 1, 0.3, 1) at 150ms for state changes."
+    ],
+    "donts": [
+      "Don't build screens as a grid of separate KPI tiles over an alert table; put figures in rows or a joined, hairline-divided strip.",
+      "Don't fill a whole row or panel with yellow; the status cell lights, the row does not.",
+      "Don't use solid red for anything below critical severity.",
+      "Don't add drop shadows to panels, rows or controls; only the pass lifts.",
+      "Don't introduce a light theme or a second accent hue; the hall is dark and the signal is yellow."
+    ]
+  }
+}

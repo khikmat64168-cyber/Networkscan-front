@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+
+# Impeccable design-run scratch (keep surfaces/ and design.json)
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/build/
+.impeccable/questions/

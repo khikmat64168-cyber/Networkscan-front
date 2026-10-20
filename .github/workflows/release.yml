@@ -1,13 +1,11 @@
 name: Release
 
 # Push a tag like v1.2.3 (matching package.json "version") to build the
-# console, publish networkscan-front-<tag>.tar.gz (+ .sha256) as a GitHub
-# Release — the NST backend bundles it from there — and deploy it to the VPS.
-#
-# Repository secrets (Settings → Secrets and variables → Actions):
-#   VPS_HOST         VPS address (IP or name)
-#   VPS_SSH_KEY      private key of the "deploy" user
-#   VPS_KNOWN_HOSTS  output of: ssh-keyscan -t ed25519 <VPS address>
+# console and publish networkscan-front-<tag>.tar.gz (+ .sha256) as a GitHub
+# Release.  The NST backend bundles the release pinned in its
+# frontend.version into its Docker image and wheel, so shipping a new
+# console means: release here, then bump frontend.version in the backend
+# and release the backend.  No secrets are needed in this repository.
 on:
   push:
     tags: ["v*"]
@@ -51,30 +49,3 @@ jobs:
             "networkscan-front-$GITHUB_REF_NAME.tar.gz" \
             "networkscan-front-$GITHUB_REF_NAME.tar.gz.sha256" \
             --title "$GITHUB_REF_NAME" --generate-notes --verify-tag
-      - uses: actions/upload-artifact@v4
-        with:
-          name: bundle
-          path: networkscan-front-${{ github.ref_name }}.tar.gz*
-          retention-days: 7
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-24.04
-    environment: production
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: bundle
-      - name: SSH setup
-        run: |
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
-          printf '%s\n' "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
-      - name: Upload and activate
-        run: |
-          scp -q networkscan-front-"$GITHUB_REF_NAME".tar.gz* \
-            "deploy@${{ secrets.VPS_HOST }}:/srv/networkscan-front/incoming/"
-          # The tag is expanded here on purpose (SC2029).
-          # shellcheck disable=SC2029
-          ssh "deploy@${{ secrets.VPS_HOST }}" "/opt/nst/deploy/deploy-front.sh '$GITHUB_REF_NAME'"

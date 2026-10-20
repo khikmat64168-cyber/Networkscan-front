@@ -107,11 +107,13 @@ export interface NetworkInterface {
 export interface Health {
   status: string;
   version: string;
-  python: string;
-  platform: string;
-  running_as_root: boolean;
+  mode: ServerMode;
   instance_id: string;
   last_event_seq: number;
+  /** Host details: omitted by the public demo. */
+  python?: string;
+  platform?: string;
+  running_as_root?: boolean;
 }
 
 export type FeatureStatus = "operational" | "blocked" | "unavailable";
@@ -187,6 +189,21 @@ export interface ReportItem {
 export interface ReportCreated {
   report: ReportItem;
   summary: { tls_hosts: number; interfaces: number; critical: number };
+}
+
+export type ServerMode = "local" | "console" | "public";
+
+export interface ModeInfo {
+  mode: ServerMode;
+  version: string;
+  auth: "none" | "token";
+  limits?: {
+    tls_hosts_per_request: number;
+    tls_hosts_per_minute: number;
+    tls_timeout_max: number;
+    tls_ports: number[];
+    geoip_targets_per_minute: number;
+  };
 }
 
 export type StreamMessage =

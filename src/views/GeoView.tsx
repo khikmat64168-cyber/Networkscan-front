@@ -2,13 +2,13 @@ import { MapPin } from "lucide-react";
 import { useState } from "react";
 
 import { api } from "../api/client";
-import type { GeoResult } from "../api/types";
+import type { GeoResult, ModeInfo } from "../api/types";
 import { Empty, ErrorNotice, Notice } from "../components/common";
 import { DASH } from "../format";
 import { useAction } from "../hooks";
 import { parseHosts } from "./TlsView";
 
-export function GeoView() {
+export function GeoView({ limits }: { limits?: ModeInfo["limits"] }) {
   const [targets, setTargets] = useState("");
   const [results, setResults] = useState<GeoResult[] | null>(null);
   const lookup = useAction(async (list: string[]) =>
@@ -58,7 +58,9 @@ export function GeoView() {
             </button>
           </div>
           <p className="hint" style={{ marginTop: 8 }}>
-            Up to 20 targets. Successful answers are cached for the life of the server; failures are retried next time.
+            Up to 20 targets
+            {limits ? ` (${limits.geoip_targets_per_minute} per minute in the public demo)` : ""}. Successful answers are
+            cached for the life of the server; failures are retried next time.
           </p>
           {lookup.error ? (
             <div style={{ marginTop: 12 }}>

@@ -5,9 +5,16 @@ import { ErrorNotice, Notice, SkeletonRows, StatusWord } from "../components/com
 import { DASH } from "../format";
 import { useApiGet } from "../hooks";
 
-export function SystemView({ capabilities }: { capabilities: { data: Capabilities | null; reload: () => void; loading: boolean; error: { code: string; message: string } | null } }) {
+export function SystemView({
+  capabilities,
+  isPublic,
+}: {
+  capabilities: { data: Capabilities | null; reload: () => void; loading: boolean; error: { code: string; message: string } | null };
+  isPublic: boolean;
+}) {
   const health = useApiGet<Health>("/api/health");
-  const config = useApiGet<AppConfigView>("/api/config");
+  // The public demo does not expose host configuration.
+  const config = useApiGet<AppConfigView>(isPublic ? null : "/api/config");
   const caps = capabilities.data;
 
   return (
@@ -77,18 +84,28 @@ export function SystemView({ capabilities }: { capabilities: { data: Capabilitie
               <dl className="kv">
                 <dt>NST version</dt>
                 <dd className="mono">{health.data.version}</dd>
-                <dt>Platform</dt>
-                <dd>{health.data.platform}</dd>
-                <dt>Python</dt>
-                <dd className="mono">{health.data.python}</dd>
-                <dt>Running as root</dt>
-                <dd>{health.data.running_as_root ? "Yes" : "No"}</dd>
+                <dt>Mode</dt>
+                <dd>{health.data.mode === "public" ? "Public demo" : health.data.mode === "console" ? "Private console" : "Local"}</dd>
+                {health.data.platform !== undefined ? (
+                  <>
+                    <dt>Platform</dt>
+                    <dd>{health.data.platform}</dd>
+                    <dt>Python</dt>
+                    <dd className="mono">{health.data.python}</dd>
+                    <dt>Running as root</dt>
+                    <dd>{health.data.running_as_root ? "Yes" : "No"}</dd>
+                  </>
+                ) : null}
                 <dt>Listening on</dt>
-                <dd className="mono">{window.location.host} (loopback only)</dd>
+                <dd className="mono">
+                  {window.location.host}
+                  {health.data.mode === "local" ? " (loopback only)" : " (behind the reverse proxy)"}
+                </dd>
               </dl>
             )}
           </div>
         </section>
+        {isPublic ? null : (
         <section className="panel">
           <div className="panel-head">
             <h3>Configuration</h3>
@@ -122,6 +139,7 @@ export function SystemView({ capabilities }: { capabilities: { data: Capabilitie
             )}
           </div>
         </section>
+        )}
       </div>
     </div>
   );

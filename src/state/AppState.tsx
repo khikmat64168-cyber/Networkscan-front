@@ -4,9 +4,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef } from "react";
 import type { ReactNode } from "react";
 
-import { api, initToken, onUnauthorized, setToken } from "../api/client";
+import { ApiError, api, describeError, initToken, onUnauthorized, setToken } from "../api/client";
 import { connectStream } from "../api/stream";
-import type { SecurityEvent, SensorKind, SensorStatus, Severity, TrafficDetails } from "../api/types";
+import type { ModeInfo, SecurityEvent, SensorKind, SensorStatus, Severity, TrafficDetails } from "../api/types";
 import { initialState, reducer } from "./reducer";
 import type { Action, State } from "./reducer";
 
@@ -48,6 +48,7 @@ interface AppContextValue {
   startSensor: (kind: SensorKind, options: StartOptions) => Promise<SensorStatus>;
   stopSensor: (kind: SensorKind) => Promise<SensorStatus>;
   signIn: (token: string) => void;
+  retryMode: () => void;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -62,6 +63,21 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   instanceRef.current = state.instanceId;
 
   useEffect(() => saveSeen(state.seen), [state.seen]);
+
+  // Which server is this?  /api/mode needs no token.  A backend from before
+  // the deployment modes has no such endpoint: treat it as a local console.
+  const loadMode = useCallback(() => {
+    api<ModeInfo>("/api/mode")
+      .then((mode) => dispatch({ type: "mode", mode }))
+      .catch((err: unknown) => {
+        if (err instanceof ApiError && err.status === 404) {
+          dispatch({ type: "mode", mode: { mode: "local", version: "", auth: "token" } });
+        } else {
+          dispatch({ type: "modeError", error: describeError(err) });
+        }
+      });
+  }, []);
+  useEffect(loadMode, [loadMode]);
 
   // A fresh `nst web` link opened in this same tab only changes the hash,
   // so pick the new token up without waiting for a reload.
@@ -101,8 +117,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const modeName = state.mode?.mode;
   useEffect(() => {
-    if (state.auth !== "ok") return;
+    // The public demo has no live stream: nothing is captured there.
+    if (state.auth !== "ok" || !modeName || modeName === "public") return;
     const stop = connectStream({
       onStatus: (status) => dispatch({ type: "stream", status }),
       onHandshakeFailed: () => {
@@ -132,7 +150,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       },
     });
     return stop;
-  }, [state.auth, backfill]);
+  }, [state.auth, modeName, backfill]);
 
   const startSensor = useCallback(async (kind: SensorKind, options: StartOptions) => {
     const body: Record<string, unknown> = { interface: options.interface };
@@ -159,8 +177,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ state, dispatch, startSensor, stopSensor, signIn }),
-    [state, startSensor, stopSensor, signIn],
+    () => ({ state, dispatch, startSensor, stopSensor, signIn, retryMode: loadMode }),
+    [state, startSensor, stopSensor, signIn, loadMode],
   );
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

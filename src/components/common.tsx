@@ -52,6 +52,8 @@ export function ErrorNotice({ error, action }: { error: { code: string; message:
     backend_unreachable: "Backend unreachable",
     unauthorized: "Access token rejected",
     not_found: "Not found",
+    rate_limited: "Slow down",
+    public_demo: "Not in the public demo",
   };
   return (
     <Notice tone={error.code === "invalid_input" || error.code === "already_running" ? "warn" : "bad"} title={titles[error.code] ?? (action ? `${action} failed` : "Request failed")}>

@@ -81,6 +81,25 @@ describe("server instance", () => {
   });
 });
 
+describe("server mode", () => {
+  it("signs the public demo in without a token and keeps token servers gated", () => {
+    const missing = initialState("missing", new Set());
+    const pub = reducer(missing, { type: "mode", mode: { mode: "public", version: "1.0.0", auth: "none" } });
+    expect(pub.auth).toBe("ok");
+    expect(pub.mode?.mode).toBe("public");
+
+    const console = reducer(missing, { type: "mode", mode: { mode: "console", version: "1.0.0", auth: "token" } });
+    expect(console.auth).toBe("missing");
+  });
+
+  it("keeps the mode across a server-instance reset", () => {
+    let s = reducer(base(), { type: "mode", mode: { mode: "console", version: "1.0.0", auth: "token" } });
+    s = reducer(s, { type: "instance", instanceId: "a" });
+    s = reducer(s, { type: "instance", instanceId: "b" });
+    expect(s.mode?.mode).toBe("console");
+  });
+});
+
 describe("filterEvents", () => {
   const events = [
     ev(3, { severity: "low", sensor: "dns", summary: "zero TTL", asset_ref: "example.com" }),

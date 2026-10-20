@@ -1,0 +1,80 @@
+name: Release
+
+# Push a tag like v1.2.3 (matching package.json "version") to build the
+# console, publish networkscan-front-<tag>.tar.gz (+ .sha256) as a GitHub
+# Release — the NST backend bundles it from there — and deploy it to the VPS.
+#
+# Repository secrets (Settings → Secrets and variables → Actions):
+#   VPS_HOST         VPS address (IP or name)
+#   VPS_SSH_KEY      private key of the "deploy" user
+#   VPS_KNOWN_HOSTS  output of: ssh-keyscan -t ed25519 <VPS address>
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Tag matches package.json
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != v$version"; exit 1; }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Package
+        run: |
+          name="networkscan-front-$GITHUB_REF_NAME.tar.gz"
+          tar -czf "$name" -C dist .
+          sha256sum "$name" > "$name.sha256"
+      - name: GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "networkscan-front-$GITHUB_REF_NAME.tar.gz" \
+            "networkscan-front-$GITHUB_REF_NAME.tar.gz.sha256" \
+            --title "$GITHUB_REF_NAME" --generate-notes --verify-tag
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bundle
+          path: networkscan-front-${{ github.ref_name }}.tar.gz*
+          retention-days: 7
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment: production
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: bundle
+      - name: SSH setup
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+      - name: Upload and activate
+        run: |
+          scp -q networkscan-front-"$GITHUB_REF_NAME".tar.gz* \
+            "deploy@${{ secrets.VPS_HOST }}:/srv/networkscan-front/incoming/"
+          # The tag is expanded here on purpose (SC2029).
+          # shellcheck disable=SC2029
+          ssh "deploy@${{ secrets.VPS_HOST }}" "/opt/nst/deploy/deploy-front.sh '$GITHUB_REF_NAME'"

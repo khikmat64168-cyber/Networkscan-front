@@ -2,7 +2,7 @@
 // backend through these transitions.  Nothing here invents data.
 
 import type { StreamStatus } from "../api/stream";
-import type { SecurityEvent, SensorKind, SensorStatus, Severity, TrafficDetails } from "../api/types";
+import type { ModeInfo, SecurityEvent, SensorKind, SensorStatus, Severity, TrafficDetails } from "../api/types";
 
 export const MAX_EVENTS = 2000;
 
@@ -10,6 +10,9 @@ export type AuthState = "ok" | "missing" | "rejected";
 
 export interface State {
   auth: AuthState;
+  /** What the server is (local / console / public); null until /api/mode answered. */
+  mode: ModeInfo | null;
+  modeError: { code: string; message: string } | null;
   /** Server run the cached history belongs to; a change resets the history. */
   instanceId: string | null;
   stream: StreamStatus;
@@ -29,6 +32,8 @@ export interface State {
 
 export type Action =
   | { type: "auth"; auth: AuthState }
+  | { type: "mode"; mode: ModeInfo }
+  | { type: "modeError"; error: { code: string; message: string } }
   | { type: "instance"; instanceId: string }
   | { type: "stream"; status: StreamStatus }
   | { type: "sensors"; sensors: SensorStatus[] }
@@ -41,6 +46,8 @@ export type Action =
 export function initialState(auth: AuthState, seen: Set<string>): State {
   return {
     auth,
+    mode: null,
+    modeError: null,
     instanceId: null,
     stream: "connecting",
     events: [],
@@ -58,6 +65,16 @@ export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "auth":
       return { ...state, auth: action.auth };
+    case "mode":
+      // The public demo has no token at all.
+      return {
+        ...state,
+        mode: action.mode,
+        modeError: null,
+        auth: action.mode.auth === "none" ? "ok" : state.auth,
+      };
+    case "modeError":
+      return { ...state, modeError: action.error };
     case "instance":
       if (state.instanceId === action.instanceId) return state;
       if (state.instanceId === null) return { ...state, instanceId: action.instanceId };
@@ -65,6 +82,7 @@ export function reducer(state: State, action: Action): State {
       // cached history can neither be resumed nor mixed with the new one.
       return {
         ...initialState(state.auth, state.seen),
+        mode: state.mode,
         stream: state.stream,
         instanceId: action.instanceId,
       };

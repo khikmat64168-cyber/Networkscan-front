@@ -2,7 +2,7 @@ import { ArrowRight, CheckCircle2, ScanSearch } from "lucide-react";
 import { useState } from "react";
 
 import { api } from "../api/client";
-import type { TlsResult } from "../api/types";
+import type { ModeInfo, TlsResult } from "../api/types";
 import { Empty, ErrorNotice, SeverityTag } from "../components/common";
 import { usePerforation } from "../components/Pass";
 import { DASH, formatDateTime } from "../format";
@@ -15,9 +15,11 @@ export function parseHosts(text: string): string[] {
     .filter(Boolean);
 }
 
-export function TlsView() {
+export function TlsView({ limits }: { limits?: ModeInfo["limits"] }) {
   const [hosts, setHosts] = useState("");
-  const [timeout, setTimeoutValue] = useState(10);
+  const maxTimeout = limits?.tls_timeout_max ?? 15;
+  const maxHosts = limits?.tls_hosts_per_request ?? 10;
+  const [timeout, setTimeoutValue] = useState(Math.min(10, maxTimeout));
   const [results, setResults] = useState<TlsResult[] | null>(null);
   const scan = useAction(async (list: string[], t: number) =>
     api<{ results: TlsResult[] }>("/api/tls/scan", { method: "POST", body: { hosts: list, timeout: t } }),
@@ -69,7 +71,7 @@ export function TlsView() {
                 className="input mono"
                 type="number"
                 min={1}
-                max={15}
+                max={maxTimeout}
                 value={timeout}
                 onChange={(e) => setTimeoutValue(Number(e.target.value))}
                 style={{ width: 96 }}
@@ -81,7 +83,11 @@ export function TlsView() {
             </button>
           </div>
           <p className="hint" id="tls-hint" style={{ marginTop: 8 }}>
-            Up to 10 hosts, separated by commas or spaces. Port 443 unless given as host:port. Hosts are scanned in parallel.
+            Up to {maxHosts} hosts, separated by commas or spaces. Port 443 unless given as host:port. Hosts are scanned in
+            parallel.
+            {limits
+              ? ` Public demo: public hosts only, ${limits.tls_hosts_per_minute} hosts per minute, ports ${limits.tls_ports.join(", ")}.`
+              : ""}
           </p>
           {scan.error ? (
             <div style={{ marginTop: 12 }}>

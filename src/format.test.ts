@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 
-import { getToken, initToken, setToken } from "./api/client";
+import { getToken, initToken, normalizeToken, setToken } from "./api/client";
 import { parseHosts } from "./views/TlsView";
 import { DASH, categoryLabel, findingChange, middleEllipsis, formatBytes, formatDuration, formatNumber, scanBars, serial } from "./format";
 
@@ -64,5 +64,23 @@ describe("token handling", () => {
 
   it("returns null without a token", () => {
     expect(initToken()).toBeNull();
+  });
+
+  it("accepts a pasted token in the forms people copy it", () => {
+    expect(normalizeToken("  abc_DEF-123 ")).toBe("abc_DEF-123");
+    expect(normalizeToken("NST_WEB_TOKEN=abc_DEF-123")).toBe("abc_DEF-123");
+    expect(normalizeToken('export NST_WEB_TOKEN="abc_DEF-123"')).toBe("abc_DEF-123");
+    expect(normalizeToken("http://127.0.0.1:8765/#token=abc_DEF-123")).toBe("abc_DEF-123");
+  });
+
+  it("rejects values that cannot be a token", () => {
+    expect(normalizeToken("")).toBeNull();
+    expect(normalizeToken("abc DEF")).toBeNull();
+    expect(normalizeToken("a=b")).toBeNull();
+  });
+
+  it("ignores a malformed stored token instead of using it", () => {
+    setToken("NST_WEB_TOKEN=abc");
+    expect(getToken()).toBeNull();
   });
 });

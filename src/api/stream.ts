@@ -39,7 +39,13 @@ export function connectStream(handlers: StreamHandlers): () => void {
     }
     handlers.onStatus(attempt === 0 ? "connecting" : "reconnecting");
     const scheme = window.location.protocol === "https:" ? "wss" : "ws";
-    socket = new WebSocket(`${scheme}://${window.location.host}/api/stream`, ["nst.v1", `auth.${token}`]);
+    try {
+      socket = new WebSocket(`${scheme}://${window.location.host}/api/stream`, ["nst.v1", `auth.${token}`]);
+    } catch {
+      // The browser refuses a subprotocol it cannot send: treat as a bad token.
+      handlers.onStatus("rejected");
+      return;
+    }
     let opened = false;
 
     socket.onopen = () => {

@@ -1,10 +1,13 @@
 import { KeyRound } from "lucide-react";
 import { useState } from "react";
 
+import { normalizeToken } from "../api/client";
 import { BoardMark, Notice } from "../components/common";
 
 export function TokenGate({ rejected, onSubmit }: { rejected: boolean; onSubmit: (token: string) => void }) {
   const [token, setToken] = useState("");
+  const normalized = normalizeToken(token);
+  const malformed = token.trim() !== "" && normalized === null;
   return (
     <main className="gate">
       <div className="gate-card">
@@ -22,7 +25,7 @@ export function TokenGate({ rejected, onSubmit }: { rejected: boolean; onSubmit:
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            if (token.trim()) onSubmit(token.trim());
+            if (normalized) onSubmit(normalized);
           }}
         >
           <label className="sr-only" htmlFor="token">
@@ -35,13 +38,20 @@ export function TokenGate({ rejected, onSubmit }: { rejected: boolean; onSubmit:
             autoComplete="off"
             spellCheck={false}
             placeholder="Paste access token"
+            aria-invalid={malformed}
+            aria-describedby={malformed ? "token-error" : undefined}
             onChange={(e) => setToken(e.target.value)}
           />
-          <button type="submit" className="btn primary" disabled={!token.trim()}>
+          <button type="submit" className="btn primary" disabled={!normalized}>
             <KeyRound size={14} aria-hidden="true" />
             Connect
           </button>
         </form>
+        {malformed ? (
+          <p id="token-error" className="gate-error" role="alert">
+            That is not an access token: it should be letters, digits, <code>-</code> and <code>_</code> only.
+          </p>
+        ) : null}
       </div>
     </main>
   );

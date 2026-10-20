@@ -39,6 +39,24 @@ function writeStorage(token: string | null): void {
 
 let memoryToken: string | null = null;
 
+// Server tokens are URL-safe base64 (secrets.token_urlsafe) or, for the
+// private console, alphanumeric; nothing else can be a WebSocket subprotocol.
+const TOKEN_RE = /^[A-Za-z0-9_-]+$/;
+
+/**
+ * Turn whatever the user pasted into a bare token, or null if it is not one.
+ * Accepts the bare token, the `NST_WEB_TOKEN=…` line from the console's
+ * .env (optionally quoted), and a full `…#token=…` link.
+ */
+export function normalizeToken(raw: string): string | null {
+  let value = raw.trim();
+  const fragment = value.match(/[#&]token=([^&\s]+)/);
+  if (fragment?.[1]) value = fragment[1];
+  value = value.replace(/^(?:export\s+)?NST_WEB_TOKEN\s*=\s*/, "");
+  value = value.replace(/^(["'])(.*)\1$/, "$2").trim();
+  return TOKEN_RE.test(value) ? value : null;
+}
+
 /** Pick up a token from the URL fragment, strip it, and return the active token. */
 export function initToken(): string | null {
   const match = window.location.hash.match(/(?:^#|&)token=([A-Za-z0-9_-]+)/);
@@ -51,7 +69,9 @@ export function initToken(): string | null {
 }
 
 export function getToken(): string | null {
-  return memoryToken ?? readStorage();
+  const token = memoryToken ?? readStorage();
+  // A malformed value (e.g. stored by an older build) counts as no token.
+  return token && TOKEN_RE.test(token) ? token : null;
 }
 
 export function setToken(token: string | null): void {

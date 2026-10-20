@@ -1630,6 +1630,15 @@ textarea.input {
   flex: 1;
 }
 
+.gate-card .input[aria-invalid="true"] {
+  border-color: var(--crit);
+}
+
+.gate-card .gate-error {
+  color: var(--crit);
+  font-size: var(--fs-13);
+}
+
 /* ── Responsive ────────────────────────────────────────────────────── */
 
 @media (max-width: 1280px) {

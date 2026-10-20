@@ -172,7 +172,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = useCallback((token: string) => {
-    setToken(token.trim());
+    setToken(token);
     dispatch({ type: "auth", auth: "ok" });
   }, []);
 

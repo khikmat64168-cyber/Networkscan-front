@@ -9,6 +9,14 @@ import type { ModeInfo } from "../api/types";
 const BACKEND_REPO = "https://github.com/khikmat64168-cyber/network-security-toolkit";
 const FRONTEND_REPO = "https://github.com/khikmat64168-cyber/Networkscan-front";
 
+/**
+ * The release wheel of the server's own version.  It bundles this console;
+ * the package is not on PyPI, and a plain checkout has no built frontend.
+ */
+export function wheelUrl(version: string): string {
+  return `${BACKEND_REPO}/releases/download/v${version}/network_security_toolkit-${version}-py3-none-any.whl`;
+}
+
 const LOCAL_ONLY = [
   { name: "Traffic analyzer", what: "Protocol mix, top talkers and ports, plaintext credentials, port scans, DNS tunneling." },
   { name: "ARP spoofing detector", what: "IP → MAC bindings, gateway MAC changes, gratuitous ARP, combined MITM signals." },
@@ -95,12 +103,9 @@ export function AboutView({ mode, onOpen }: { mode: ModeInfo; onOpen: (view: "tl
         </div>
         <div className="panel-body about-install">
           <pre className="code-block">
-            <code>{`git clone ${BACKEND_REPO}.git
-cd network-security-toolkit
-python3 -m venv .venv && . .venv/bin/activate
-pip install '.[web]'
-./scripts/fetch_frontend.sh --release
-sudo .venv/bin/nst web`}</code>
+            <code>{`python3 -m venv nst-env
+nst-env/bin/pip install "network-security-toolkit[web] @ ${wheelUrl(mode.version)}"
+sudo nst-env/bin/nst web`}</code>
           </pre>
           <div className="about-links">
             <a href={BACKEND_REPO} target="_blank" rel="noreferrer noopener">
@@ -113,6 +118,10 @@ sudo .venv/bin/nst web`}</code>
               Networkscan-front (this web console)
               <ArrowRight size={14} aria-hidden="true" />
             </a>
+            <p className="hint">
+              Python 3.12+. <code>nst web</code> opens your browser on its own one-time link: there is no account, and no
+              token to ask anyone for.
+            </p>
             <p className="hint">Version {mode.version}. Use it only on networks you own or are authorised to test.</p>
           </div>
         </div>

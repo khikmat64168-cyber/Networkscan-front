@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 
 import { getToken, initToken, normalizeToken, setToken } from "./api/client";
+import { wheelUrl } from "./views/AboutView";
 import { parseHosts } from "./views/TlsView";
 import { DASH, categoryLabel, findingChange, middleEllipsis, formatBytes, formatDuration, formatNumber, scanBars, serial } from "./format";
 
@@ -46,6 +47,14 @@ describe("format", () => {
 
   it("parses host lists", () => {
     expect(parseHosts(" github.com,example.com:8443  1.1.1.1 ")).toEqual(["github.com", "example.com:8443", "1.1.1.1"]);
+  });
+});
+
+describe("install instructions", () => {
+  it("point at the release wheel of the running version", () => {
+    expect(wheelUrl("1.0.2")).toBe(
+      "https://github.com/khikmat64168-cyber/network-security-toolkit/releases/download/v1.0.2/network_security_toolkit-1.0.2-py3-none-any.whl",
+    );
   });
 });
 

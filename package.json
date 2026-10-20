@@ -1,7 +1,7 @@
 {
   "name": "networkscan-front",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Web console for the Network Security Toolkit (NST): live findings board, traffic, TLS, GeoIP and reports.",
   "license": "MIT",
   "type": "module",
